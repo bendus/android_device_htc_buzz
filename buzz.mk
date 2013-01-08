@@ -109,6 +109,8 @@ PRODUCT_COPY_FILES += \
 	
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
 
+# build gpsshim using Evervolv/android_hardware_gpsshim
+$(call inherit-product-if-exists, hardware/gpsshim/Android.mk)
 # The gps config appropriate for this device
 $(call inherit-product, device/common/gps/gps_eu_supl.mk)
 
