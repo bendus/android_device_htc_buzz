@@ -26,6 +26,9 @@ PRODUCT_COPY_FILES += \
 DISABLE_DEXPREOPT := false
 PRODUCT_TAGS += dalvik.gc.type-precise
 
+# dalvik heap config
+$(call inherit-product, frameworks/native/build/phone-hdpi-dalvik-heap.mk)
+
 # Add device specific overlays
 	DEVICE_PACKAGE_OVERLAYS += device/ldpi-common/overlay
 
