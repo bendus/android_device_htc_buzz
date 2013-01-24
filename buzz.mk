@@ -107,8 +107,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/initramfs/init.buzz.usb.rc:root/init.buzz.usb.rc \
     $(LOCAL_PATH)/initramfs/ueventd.buzz.rc:root/ueventd.buzz.rc \
     $(LOCAL_PATH)/vold.fstab:system/etc/vold.fstab
-	
-$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
+
+$(call inherit-product, $(LOCAL_PATH)/product/full_base_telephony.mk)
 
 # build gpsshim using Evervolv/android_hardware_gpsshim
 $(call inherit-product-if-exists, hardware/gpsshim/Android.mk)
