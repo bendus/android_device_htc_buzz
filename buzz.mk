@@ -34,7 +34,9 @@ $(call inherit-product, frameworks/native/build/phone-hdpi-dalvik-heap.mk)
 
 # DPI size for Buzz
 	PRODUCT_LOCALES += mdpi
-	
+	PRODUCT_AAPT_CONFIG := normal ldpi mdpi
+	PRODUCT_AAPT_PREF_CONFIG := ldpi
+
 # Input device calibration files
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/touchscreen/atmel-touchscreen.idc:system/usr/idc/atmel-touchscreen.idc \
