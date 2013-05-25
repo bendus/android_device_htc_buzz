@@ -110,7 +110,6 @@ enum {
 
 /* must not be defined when included from gralloc_priv.h */
 #ifndef GRALLOC_PRIV_H_
-
 enum {
     /* FIXME: this only exists to work-around some issues with
      * the video and camera frameworks. don't implement unless

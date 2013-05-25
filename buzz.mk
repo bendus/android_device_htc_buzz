@@ -26,12 +26,17 @@ PRODUCT_COPY_FILES += \
 DISABLE_DEXPREOPT := false
 PRODUCT_TAGS += dalvik.gc.type-precise
 
-# Include device specific overlays
-	DEVICE_PACKAGE_OVERLAYS := device/ldpi-common/overlay
+# dalvik heap config
+$(call inherit-product, frameworks/native/build/phone-hdpi-dalvik-heap.mk)
+
+# Add device specific overlays
+	DEVICE_PACKAGE_OVERLAYS += device/ldpi-common/overlay
 
 # DPI size for Buzz
 	PRODUCT_LOCALES += mdpi
-	
+	PRODUCT_AAPT_CONFIG := normal ldpi mdpi
+	PRODUCT_AAPT_PREF_CONFIG := mdpi
+
 # Input device calibration files
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/touchscreen/atmel-touchscreen.idc:system/usr/idc/atmel-touchscreen.idc \
@@ -50,15 +55,14 @@ PRODUCT_COPY_FILES += \
 # Bluetooth cfg file & BCM4329 firmware and module
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/firmware/bcm4329.hcd:system/etc/firmware/bcm4329.hcd \
-    $(LOCAL_PATH)/prebuilt/firmware/bcm4329.hcd:root/etc/firmware/bcm4329.hcd \
     $(LOCAL_PATH)/prebuilt/firmware/bcm4329.hcd:system/vendor/firmware/bcm4329.hcd \
-    $(LOCAL_PATH)/prebuilt/firmware/bcm4329.ko:root/lib/modules/bcm4329.ko \
-    $(LOCAL_PATH)/prebuilt/firmware/bcm4329.ko:system/lib/modules/bcm4329.ko \
+    $(LOCAL_PATH)/prebuilt/wifi/bcm4329.ko:system/lib/modules/bcm4329.ko \
     $(LOCAL_PATH)/prebuilt/wpa_supplicant_template.conf:system/etc/wifi/wpa_supplicant.conf \
     system/bluetooth/data/main.conf:system/etc/bluetooth/main.conf
 
 # Media profile XML
 PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/prebuilt/media_codecs.xml:/system/etc/media_codecs.xml \
     $(LOCAL_PATH)/prebuilt/media_profiles.xml:/system/etc/media_profiles.xml
 
 # Audio_policy.conf
@@ -89,7 +93,6 @@ PRODUCT_PACKAGES += \
 # Omx
 PRODUCT_PACKAGES += \
     libdivxdrmdecrypt \
-    libmm-omxcore \
     libOmxVdec \
     libOmxVenc \
     libstagefrighthw
@@ -103,20 +106,23 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/initramfs/init.buzz.rc:root/init.buzz.rc \
     $(LOCAL_PATH)/initramfs/init.buzz.usb.rc:root/init.buzz.usb.rc \
     $(LOCAL_PATH)/initramfs/ueventd.buzz.rc:root/ueventd.buzz.rc \
-    $(LOCAL_PATH)/initramfs/proc/sys/net/ipv6/conf/wlan0:root/proc/sys/net/ipv6/conf/ \
-    $(LOCAL_PATH)/initramfs/proc/sys/net/ipv6/conf/wlan0/disable_ipv6:root/proc/sys/net/ipv6/conf/disable_ipv6 \
     $(LOCAL_PATH)/vold.fstab:system/etc/vold.fstab
-	
-$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
 
+$(call inherit-product, $(LOCAL_PATH)/product/full_base_telephony.mk)
+
+# build gpsshim using Evervolv/android_hardware_gpsshim
+$(call inherit-product-if-exists, hardware/gpsshim/Android.mk)
 # The gps config appropriate for this device
 $(call inherit-product, device/common/gps/gps_eu_supl.mk)
+
+$(call inherit-product-if-exists, vendor/htc/buzz/buzz-vendor.mk)
+$(call inherit-product-if-exists, vendor/htc/buzz/buzz-vendor-blobs.mk)
+
+#Attempting to get wifi to work
+$(call inherit-product-if-exists, hardware/broadcom/wlan/bcm4329/Android.mk)
 
 # Interfaces
 PRODUCT_PROPERTY_OVERRIDES += \
     mobiledata.interfaces=rmnet0,rmnet1,rmnet2,gprs,ppp0 \
     wifi.interface=wlan0 \
     wifi.supplicant_scan_interval=15
-
-#Attempting to get wifi to work
-$(call inherit-product-if-exists, hardware/broadcom/wlan/bcm4329/Android.mk)
