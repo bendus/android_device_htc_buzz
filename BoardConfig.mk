@@ -70,8 +70,6 @@ BOARD_KERNEL_BASE 		:= 0x02E00000
 BOARD_KERNEL_PAGESIZE 		:= 2048
 
 # Enable gsm and network search
-COMMON_GLOBAL_CFLAGS += -DFORCE_RILD_AS_ROOT # Not sure if this is needed
-BOARD_FORCE_RILD_AS_ROOT := true
 BOARD_USES_LEGACY_RIL := true
 BOARD_USE_NEW_LIBRIL_HTC := true
 
