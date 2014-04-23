@@ -89,7 +89,6 @@ BOARD_HAS_LIMITED_EGL 		   := true
 TARGET_GRALLOC_USES_ASHMEM 	:= true
 TARGET_USES_GENLOCK 		:= true
 TARGET_USES_C2D_COMPOSITION 	:= false
-TARGET_HAVE_BYPASS 		:= true
 
 ## Qualcomm
 # camera
