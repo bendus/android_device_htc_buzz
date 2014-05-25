@@ -30,7 +30,7 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 $(call inherit-product, frameworks/native/build/phone-hdpi-dalvik-heap.mk)
 
 # Add device specific overlays
-	DEVICE_PACKAGE_OVERLAYS += device/ldpi-common/overlay
+	DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
 # DPI size for Buzz
 	PRODUCT_LOCALES += mdpi
