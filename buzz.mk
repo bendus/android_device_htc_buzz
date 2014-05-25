@@ -101,7 +101,7 @@ PRODUCT_PACKAGES += \
     libstagefrighthw
 
 PRODUCT_PACKAGES += \
-    Torch \
+    Camera \
     Gallery \
     FM
 
