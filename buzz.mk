@@ -34,7 +34,7 @@ $(call inherit-product, frameworks/native/build/phone-hdpi-dalvik-heap.mk)
 
 # DPI size for Buzz
 	PRODUCT_LOCALES += mdpi
-	PRODUCT_AAPT_CONFIG := normal ldpi mdpi
+	PRODUCT_AAPT_CONFIG := normal mdpi hdpi
 	PRODUCT_AAPT_PREF_CONFIG := mdpi
 
 # Input device calibration files
