@@ -79,6 +79,9 @@ on boot
     write /proc/sys/net/core/rmem_max 262144
     write /proc/sys/net/core/wmem_max 262144
 
+    # Set TCP MTU Probing to automatic:
+    write /proc/sys/net/ipv4/tcp_mtu_probing 1
+
 on fs
     # framebuffer permission for copybit
     chmod 0666 /dev/graphics/fb0
